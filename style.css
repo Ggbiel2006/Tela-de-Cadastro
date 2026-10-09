@@ -1,0 +1,305 @@
+/* Cores com contraste mínimo de 4.5:1 (WCAG AA) */
+:root {
+  --fundo: #eef2f7;
+  --cartao: #ffffff;
+  --texto: #1a1a2e;
+  --texto-suave: #4a4a5e;
+  --primaria: #0b5394;
+  --primaria-hover: #073763;
+  --borda: #6b6b80;
+  --erro: #b00020;
+  --sucesso: #1b5e20;
+  --foco: #ffbf47;
+  --tamanho-fonte: 100%;
+}
+
+/* Modo alto contraste */
+body.alto-contraste {
+  --fundo: #000000;
+  --cartao: #000000;
+  --texto: #ffffff;
+  --texto-suave: #ffffff;
+  --primaria: #ffff00;
+  --primaria-hover: #ffffff;
+  --borda: #ffffff;
+  --erro: #ff6b6b;
+  --sucesso: #7CFC00;
+  --foco: #00ffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--tamanho-fonte);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+/* Texto visível só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Link "pular para o conteúdo": aparece ao receber foco pelo teclado */
+.pular-conteudo {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--primaria);
+  color: var(--cartao);
+  font-weight: bold;
+  z-index: 100;
+}
+
+.pular-conteudo:focus {
+  top: 1rem;
+}
+
+/* Foco bem visível em todos os elementos interativos */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+}
+
+/* Barra de acessibilidade */
+.barra-acessibilidade {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--primaria);
+}
+
+.barra-acessibilidade button {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid var(--cartao);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--cartao);
+  cursor: pointer;
+}
+
+.barra-acessibilidade button:hover,
+.barra-acessibilidade button[aria-pressed="true"] {
+  background: var(--cartao);
+  color: var(--primaria);
+}
+
+body.alto-contraste .barra-acessibilidade {
+  border-bottom: 2px solid var(--borda);
+  background: var(--fundo);
+}
+
+body.alto-contraste .barra-acessibilidade button {
+  border-color: var(--primaria);
+  color: var(--primaria);
+}
+
+body.alto-contraste .barra-acessibilidade button[aria-pressed="true"],
+body.alto-contraste .barra-acessibilidade button:hover {
+  background: var(--primaria);
+  color: #000000;
+}
+
+/* Cartão do formulário */
+main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.cartao {
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+}
+
+.subtitulo {
+  margin: 0 0 1.5rem;
+  color: var(--texto-suave);
+}
+
+.campo {
+  margin-bottom: 1.25rem;
+}
+
+label,
+legend {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+fieldset {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  color: var(--texto);
+  background: var(--cartao);
+  border: 2px solid var(--borda);
+  border-radius: 6px;
+}
+
+/* Campo inválido: indicado por cor E por ícone/borda, não só por cor */
+input[aria-invalid="true"] {
+  border-color: var(--erro);
+  border-width: 3px;
+}
+
+.dica {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.erro {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--erro);
+}
+
+.erro:not(:empty)::before {
+  content: "⚠ ";
+}
+
+.senha-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-senha {
+  min-width: 90px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid var(--primaria);
+  border-radius: 6px;
+  background: var(--cartao);
+  color: var(--primaria);
+  cursor: pointer;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.4rem 0;
+}
+
+.opcao label {
+  margin: 0;
+  font-weight: normal;
+}
+
+.opcao input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--primaria);
+}
+
+.btn-principal {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: var(--primaria);
+  color: var(--cartao);
+  cursor: pointer;
+}
+
+.btn-principal:hover {
+  background: var(--primaria-hover);
+}
+
+body.alto-contraste .btn-principal {
+  color: #000000;
+}
+
+/* Aviso visual (substitui alertas sonoros para pessoas surdas) */
+.mensagem {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  font-weight: 600;
+  border-left: 6px solid;
+  border-radius: 6px;
+}
+
+.mensagem.erro-geral {
+  color: var(--erro);
+  border-color: var(--erro);
+  background: rgba(176, 0, 32, 0.08);
+}
+
+.mensagem.sucesso {
+  color: var(--sucesso);
+  border-color: var(--sucesso);
+  background: rgba(27, 94, 32, 0.1);
+}
+
+.mensagem.piscar {
+  animation: piscar 0.4s ease-in-out 3;
+}
+
+@keyframes piscar {
+  50% { opacity: 0.3; }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .mensagem.piscar {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .cartao {
+    padding: 1.25rem;
+  }
+
+  .barra-acessibilidade {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tela de cadastro acessível para pessoas com deficiência visual e auditiva.">
+  <title>Cadastro Acessível</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Acessibilidade 1: link "pular para o conteúdo" para quem navega por teclado/leitor de tela -->
+  <a class="pular-conteudo" href="#formulario">Pular para o formulário de cadastro</a>
+
+  <!-- Acessibilidade 2: barra de ferramentas (alto contraste, tamanho da fonte, leitura em voz alta) -->
+  <header class="barra-acessibilidade" role="toolbar" aria-label="Ferramentas de acessibilidade">
+    <button type="button" id="btn-contraste" aria-pressed="false">
+      <span aria-hidden="true">◐</span> Alto contraste
+    </button>
+    <button type="button" id="btn-aumentar" aria-label="Aumentar tamanho da fonte">A+</button>
+    <button type="button" id="btn-diminuir" aria-label="Diminuir tamanho da fonte">A-</button>
+    <button type="button" id="btn-ler" aria-label="Ler o formulário em voz alta">
+      <span aria-hidden="true">🔊</span> Ouvir página
+    </button>
+  </header>
+
+  <main id="conteudo">
+    <section class="cartao" aria-labelledby="titulo-cadastro">
+      <h1 id="titulo-cadastro">Crie sua conta</h1>
+      <p class="subtitulo">Campos marcados com <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+
+      <!-- Acessibilidade 3: mensagens anunciadas por leitor de tela e exibidas visualmente (sem depender de som) -->
+      <div id="mensagem" class="mensagem" role="alert" aria-live="assertive" tabindex="-1" hidden></div>
+
+      <form id="formulario" novalidate>
+        <div class="campo">
+          <label for="nome">Nome completo <span aria-hidden="true">*</span></label>
+          <input type="text" id="nome" name="nome" autocomplete="name" required
+                 aria-required="true" aria-describedby="erro-nome">
+          <p class="erro" id="erro-nome" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="email">E-mail <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required
+                 aria-required="true" aria-describedby="dica-email erro-email">
+          <p class="dica" id="dica-email">Exemplo: nome@email.com</p>
+          <p class="erro" id="erro-email" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="telefone">Telefone (opcional)</label>
+          <input type="tel" id="telefone" name="telefone" autocomplete="tel"
+                 aria-describedby="dica-telefone">
+          <p class="dica" id="dica-telefone">Usaremos SMS ou WhatsApp, nunca ligações de voz.</p>
+        </div>
+
+        <div class="campo">
+          <label for="senha">Senha <span aria-hidden="true">*</span></label>
+          <div class="senha-wrapper">
+            <input type="password" id="senha" name="senha" autocomplete="new-password" required
+                   aria-required="true" aria-describedby="dica-senha erro-senha" minlength="8">
+            <button type="button" id="btn-mostrar-senha" class="btn-senha"
+                    aria-controls="senha" aria-pressed="false">Mostrar</button>
+          </div>
+          <p class="dica" id="dica-senha">Mínimo de 8 caracteres.</p>
+          <p class="erro" id="erro-senha" aria-live="polite"></p>
+        </div>
+
+        <fieldset class="campo">
+          <legend>Como prefere receber avisos?</legend>
+          <div class="opcao">
+            <input type="radio" id="aviso-email" name="aviso" value="email" checked>
+            <label for="aviso-email">E-mail</label>
+          </div>
+          <div class="opcao">
+            <input type="radio" id="aviso-sms" name="aviso" value="sms">
+            <label for="aviso-sms">SMS / mensagem de texto</label>
+          </div>
+          <div class="opcao">
+            <input type="radio" id="aviso-video" name="aviso" value="libras">
+            <label for="aviso-video">Vídeo em Libras</label>
+          </div>
+        </fieldset>
+
+        <div class="campo opcao">
+          <input type="checkbox" id="termos" name="termos" required aria-required="true"
+                 aria-describedby="erro-termos">
+          <label for="termos">Li e aceito os termos de uso <span aria-hidden="true">*</span></label>
+        </div>
+        <p class="erro" id="erro-termos" aria-live="polite"></p>
+
+        <button type="submit" class="btn-principal">Cadastrar</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Acessibilidade 4: VLibras – tradução do conteúdo para Libras (deficiência auditiva) -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+  <script src="script.js"></script>
+</body>
+</html>
